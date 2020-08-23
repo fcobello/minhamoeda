@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<style>
+.ui-li-static {
+	padding-left: 2px !important;
+}
+</style>
+
+<h:head>
+</h:head>
+
+<h:body>
+	<pm:page style="background-color: white">
+		<pm:content style="text-align: center">
+			<h:form>
+				<p:growl id="growl" showDetail="false" />
+				<h:graphicImage value="images/minhamoeda.jpg" />
+				<br />
+				<p:spacer height="20" />
+				<p:dataList value="#{principalBean.moedas}" var="moedas"
+					id="cotacoes">
+					<h:panelGrid columns="5">
+						<p:outputLabel value="#{moedas.moedaDestino}" />
+						<p:graphicImage value="#{moedas.flagDestino}" />
+						<p:outputLabel value="#{moedas.moedaOrigem}" />
+						<p:graphicImage value="#{moedas.flagOrigem}" />
+						<p:outputLabel value="#{moedas.cotacao}" />
+					</h:panelGrid>
+					<p:outputLabel value="#{moedas.observacao}" />
+				</p:dataList>
+				<p:poll interval="60" listener="#{principalBean.init}"
+					update="cotacoes">
+				</p:poll>
+			</h:form>
+
+		</pm:content>
+	</pm:page>
+
+
+</h:body>
+</html>
